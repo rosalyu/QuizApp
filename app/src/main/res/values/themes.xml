@@ -9,9 +9,9 @@
 
     <!-- Base application theme without ActionBar. -->
     <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">#D0557F</item>
-        <item name="colorPrimaryDark">#AE1C4D</item>
-        <item name="colorSecondary">#8BC34A</item>
+        <item name="colorPrimary">#7926F8</item>
+        <item name="colorPrimaryDark">#A413A9</item>
+        <item name="colorSecondary">#FF659A</item>
     </style>
 
 </resources>
