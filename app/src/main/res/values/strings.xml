@@ -4,5 +4,5 @@
     <string name="enterName">Please enter your name.</string>
     <string name="quizApp">QuizApp</string>
     <string name="start">START</string>
-    <string name="name">&#160;&#160;Name</string>
+    <string name="name">Name</string>
 </resources>
