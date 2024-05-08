@@ -5,4 +5,7 @@
     <string name="quizApp">QuizApp</string>
     <string name="start">START</string>
     <string name="name">Name</string>
+    <string name="hello">Hello,&#160;</string>
+    <string name="exclamation">!</string>
+    <string name="pleaseSelect">Please select a quiz from below.</string>
 </resources>

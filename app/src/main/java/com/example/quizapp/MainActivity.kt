@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val textInputField: EditText = findViewById(R.id.textInputField)
-        var userName: String
         val startButton: Button = findViewById(R.id.startButton)
+        val secondActivity = Intent(this, SecondActivity::class.java)
 
         startButton.setOnClickListener {
             // if the user is empty, ask user to enter his name with a Toast
@@ -25,8 +26,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Name can't contain more than 30 characters.", Toast.LENGTH_SHORT).show()
             }
             else {
-                userName = textInputField.text.toString()
+                // pass the value to SecondActivity
+                secondActivity.putExtra("userName", textInputField.text.toString())
                 // go to next activity
+                startActivity(secondActivity)
+
             }
         }
     }
