@@ -7,16 +7,14 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 
 class ListAdapter(
     private val mContext: Context,
     private val mResource: Int,
-    private val mData: List<ConstraintLayout> // TODO create custom class for 2 quiz preview items, make it the generic type
+    private val mData: List<ListItemData>
     // TODO use bitmap object for the image files
-    // TODO each element of the data has 2 Strings and an image, for both quiz previews (so 4 Strings and 2 images)
 ) :
-    ArrayAdapter<ConstraintLayout?>(mContext, mResource, mData) {
+    ArrayAdapter<ListItemData?>(mContext, mResource, mData) {
 
     // called by the ListView when it needs to display the content of a list element at a certain position
     override fun getView(
@@ -45,12 +43,17 @@ class ListAdapter(
         val tvSecondImage = secondItem.findViewById<ImageView>(R.id.imageView)
 
         // get the current element from the data list, which contains the elements of for the ListView
-        val currentItem: ConstraintLayout = mData[position] // Todo the type has to be the generic type of mData (custom class)
+        val currentItem: ListItemData = mData[position]
 
-        // Todo set the data after creating the generic type class of mDate
-        //tvFirstTitle.setText(currentItem.getText())
-        //tvFirstDescription.setText(currentItem.getText())
-        //tvFirstImage.setImageResource(currentItem.getImageResource())
+        // set data for the first quiz preview
+        tvFirstTitle.text = currentItem.firstPreview.titleText
+        tvFirstDescription.text = currentItem.firstPreview.descriptionText
+        tvFirstImage.setImageResource(currentItem.firstPreview.imageResId)
+
+        // set data for the second quiz preview
+        tvSecondTitle.text = currentItem.secondPreview.titleText
+        tvSecondDescription.text = currentItem.secondPreview.descriptionText
+        tvSecondImage.setImageResource(currentItem.secondPreview.imageResId)
         return listItemView
     }
 }
