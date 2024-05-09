@@ -40,12 +40,7 @@ class SecondActivity: AppCompatActivity() {
             ListItemData(
                 QuizPreviewData("Title 7", "Description 7", R.drawable.ic_launcher_background),
                 QuizPreviewData("Title 8", "Description 8", R.drawable.ic_launcher_background)),
-            // TODO ADD TO GITHUB ISSUES:
 
-            // todo make the second QuizPreviewData nullable to enable a single quiz preview in a ListView line
-            // if the number of quiz previews is uneven
-
-            // todo make the text part of the list (scrollable)
             ListItemData(
                 QuizPreviewData("Title 9", "Description 9", R.drawable.ic_launcher_background),
                 QuizPreviewData("Title 10", "Description 10", R.drawable.ic_launcher_background))
