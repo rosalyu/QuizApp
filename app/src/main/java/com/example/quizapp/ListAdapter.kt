@@ -1,5 +1,6 @@
 package com.example.quizapp
 import android.content.Context
+import android.graphics.drawable.shapes.Shape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.google.android.material.shape.CornerFamily
 
 class ListAdapter(
     private val mContext: Context,
@@ -36,11 +38,11 @@ class ListAdapter(
         // get the view elements of each quiz preview
         val tvFirstTitle = firstItem!!.findViewById<TextView>(R.id.tvTitle)
         val tvFirstDescription = firstItem.findViewById<TextView>(R.id.tvDescription)
-        val tvFirstImage = firstItem.findViewById<ImageView>(R.id.imageView)
+        val tvFirstImage = firstItem.findViewById<com.google.android.material.imageview.ShapeableImageView>(R.id.imageView)
 
         val tvSecondTitle = secondItem!!.findViewById<TextView>(R.id.tvTitle)
         val tvSecondDescription = secondItem.findViewById<TextView>(R.id.tvDescription)
-        val tvSecondImage = secondItem.findViewById<ImageView>(R.id.imageView)
+        val tvSecondImage = secondItem.findViewById<com.google.android.material.imageview.ShapeableImageView>(R.id.imageView)
 
         // get the current element from the data list, which contains the elements of for the ListView
         val currentItem: ListItemData = mData[position]
@@ -50,10 +52,25 @@ class ListAdapter(
         tvFirstDescription.text = currentItem.firstPreview.descriptionText
         tvFirstImage.setImageResource(currentItem.firstPreview.imageResId)
 
+        // set image corners
+        // convert 10dp from xml to pixels to make the image corner radius equal to the
+        // quiz preview corner radius
+        val density = mContext.resources.displayMetrics.density
+        val cornerRadiusPixels = ( GlobalVariables.cornerRadius * density + 0.5f)
+
+        tvFirstImage.shapeAppearanceModel = tvFirstImage.shapeAppearanceModel.toBuilder()
+            .apply { setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadiusPixels);
+                setBottomRightCorner(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
+
         // set data for the second quiz preview
         tvSecondTitle.text = currentItem.secondPreview.titleText
         tvSecondDescription.text = currentItem.secondPreview.descriptionText
         tvSecondImage.setImageResource(currentItem.secondPreview.imageResId)
+
+        // set image corners
+        tvSecondImage.shapeAppearanceModel = tvSecondImage.shapeAppearanceModel.toBuilder()
+            .apply { setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadiusPixels);
+                setBottomRightCorner(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
         return listItemView
     }
 }

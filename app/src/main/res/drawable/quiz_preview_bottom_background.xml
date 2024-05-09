@@ -4,3 +4,4 @@
         android:bottomRightRadius="10dp"/>
     <solid android:color="@color/white"/>
 </shape>
+<!-- todo: redundant -->
