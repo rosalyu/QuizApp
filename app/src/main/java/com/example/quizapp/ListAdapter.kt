@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 
-class CustomAdapter(
+class ListAdapter(
     private val mContext: Context,
     private val mResource: Int,
     private val mData: List<ConstraintLayout> // TODO create custom class for 2 quiz preview items, make it the generic type
