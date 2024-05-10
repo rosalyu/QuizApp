@@ -34,13 +34,13 @@ class RecyclerViewAdapter(private val data: List<ListItemData>) : RecyclerView.A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_element_layout, parent, false)
-
         // assign cornerRadiusPixels based on the parent context
         // convert 10dp from xml to pixels to make the image corner radius equal to the quiz preview corner radius
         val density: Float = parent.context.resources.displayMetrics.density
         cornerRadiusPixels = ( GlobalVariables.cornerRadius * density + 0.5f)
 
+        // create ViewHolder
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_element_layout, parent, false)
         return ViewHolder(view)
     }
 

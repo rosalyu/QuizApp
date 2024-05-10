@@ -51,10 +51,11 @@ class SecondActivity: AppCompatActivity() {
 
         // FrameLayout in the xml file is a container for the RecyclerView
         val container = findViewById<FrameLayout>(R.id.listView)
-        val recyclerView =RecyclerView(this)
+        val recyclerView = RecyclerView(this)
         recyclerView.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         // set layout manager
+        // todo think of using GridLayout
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.isNestedScrollingEnabled = false
