@@ -6,10 +6,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.GlobalVariables
 import com.example.quizapp.ListItemData
+import com.example.quizapp.QuizPreviewData
 import com.example.quizapp.R
 import com.google.android.material.shape.CornerFamily
 
-class RecyclerViewAdapter(private val data: List<ListItemData>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val data: List<QuizPreviewData>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private var cornerRadiusPixels: Float = 0f
 
@@ -19,18 +20,11 @@ class RecyclerViewAdapter(private val data: List<ListItemData>) : RecyclerView.A
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //creation of ViewHolder causes layout inflation so the views inside of it become accessible
         // -> inflation only once for each view type (not for each item in the list like in ListView)
-        // each quiz preview element in a row
-        private val firstItem: LinearLayout = itemView.findViewById(R.id.firstPreview)
-        private val secondItem: LinearLayout = itemView.findViewById(R.id.secondPreview)
 
         // get the view elements of each quiz preview
-        val tvFirstTitle: TextView = firstItem.findViewById(R.id.tvTitle)
-        val tvFirstDescription: TextView = firstItem.findViewById(R.id.tvDescription)
-        val tvFirstImage: com.google.android.material.imageview.ShapeableImageView = firstItem.findViewById(R.id.imageView)
-
-        val tvSecondTitle: TextView = secondItem!!.findViewById(R.id.tvTitle)
-        val tvSecondDescription: TextView = secondItem.findViewById(R.id.tvDescription)
-        val tvSecondImage: com.google.android.material.imageview.ShapeableImageView = secondItem.findViewById(R.id.imageView)
+        val tvImage: com.google.android.material.imageview.ShapeableImageView = itemView.findViewById(R.id.imageView)
+        val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
+        val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,31 +34,20 @@ class RecyclerViewAdapter(private val data: List<ListItemData>) : RecyclerView.A
         cornerRadiusPixels = ( GlobalVariables.cornerRadius * density + 0.5f)
 
         // create ViewHolder
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_element_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.quiz_preview_layout, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.tvFirstTitle.text = item.firstPreview.titleText
-        holder.tvFirstDescription.text = item.firstPreview.descriptionText
         // todo image is not tv type
-        holder.tvFirstImage.setImageResource(item.firstPreview.imageResId)
+        holder.tvImage.setImageResource(item.imageResId)
+        holder.tvTitle.text = item.titleText
+        holder.tvDescription.text = item.descriptionText
 
         // set the corner Radius to the first ShapeableImageView
-        holder.tvFirstImage.shapeAppearanceModel = holder.tvFirstImage.shapeAppearanceModel.toBuilder()
-            .apply { setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadiusPixels);
-                setBottomRightCorner(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
-
-        holder.tvSecondTitle.text = item.secondPreview.titleText
-        holder.tvSecondDescription.text = item.secondPreview.descriptionText
-        // todo image is not tv type
-        holder.tvSecondImage.setImageResource(item.secondPreview.imageResId)
-
-        // set the corner Radius to the first ShapeableImageView
-        holder.tvSecondImage.shapeAppearanceModel = holder.tvSecondImage.shapeAppearanceModel.toBuilder()
-            .apply { setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadiusPixels);
-                setBottomRightCorner(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
+        holder.tvImage.shapeAppearanceModel = holder.tvImage.shapeAppearanceModel.toBuilder()
+            .apply { setAllCorners(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
     }
 
     override fun getItemCount(): Int {

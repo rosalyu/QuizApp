@@ -7,6 +7,7 @@ import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.StringBuilder
@@ -24,27 +25,22 @@ class SecondActivity: AppCompatActivity() {
             .append(userName).append(getString(R.string.exclamation))
 
         // initialize the data list for displaying content in the quiz previews of the ListView elements
-        val dataList: List<ListItemData> = listOf(
-            ListItemData(
-                QuizPreviewData("Title 1", "Description 1", R.drawable.ic_launcher_background),
-                QuizPreviewData("Title 2", "Description 2", R.drawable.ic_launcher_background)),
-
-            ListItemData(
-                QuizPreviewData("Title 3", "Description 3", R.drawable.ic_launcher_background),
-                QuizPreviewData("Title 4", "Description 4", R.drawable.ic_launcher_background)),
-
-            ListItemData(
-                QuizPreviewData("Title 5", "Description 5", R.drawable.ic_launcher_background),
-                QuizPreviewData("Title 6", "Description 6", R.drawable.ic_launcher_background)),
-
-            ListItemData(
-                QuizPreviewData("Title 7", "Description 7", R.drawable.ic_launcher_background),
-                QuizPreviewData("Title 8", "Description 8", R.drawable.ic_launcher_background)),
-
-            ListItemData(
-                QuizPreviewData("Title 9", "Description 9", R.drawable.ic_launcher_background),
-                QuizPreviewData("Title 10", "Description 10", R.drawable.ic_launcher_background))
-        )
+        val dataList: List<QuizPreviewData> = listOf(
+            QuizPreviewData("Title 1", "Description 1", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 2", "Description 2", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 3", "Description 3", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 4", "Description 4", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 5", "Description 5", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 6", "Description 6", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 7", "Description 7", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 8", "Description 8", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 9", "Description 9", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 10", "Description 10", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 6", "Description 6", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 7", "Description 7", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 8", "Description 8", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 9", "Description 9", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 10", "Description 10", R.drawable.ic_launcher_background))
         //val listAdapter = ListAdapter(this, R.layout.list_element_layout, dataList)
         //listView.adapter = listAdapter
         val recyclerViewAdapter = RecyclerViewAdapter(dataList)
@@ -56,9 +52,10 @@ class SecondActivity: AppCompatActivity() {
             FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         // set layout manager
         // todo think of using GridLayout
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = recyclerViewAdapter
         recyclerView.isNestedScrollingEnabled = false
+        // make spacings using decoration class
 
         // add recyclerView to the container (FrameLayout)
         container.addView(recyclerView)
