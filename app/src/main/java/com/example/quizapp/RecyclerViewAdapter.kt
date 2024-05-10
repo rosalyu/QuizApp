@@ -1,11 +1,9 @@
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.GlobalVariables
-import com.example.quizapp.ListItemData
 import com.example.quizapp.QuizPreviewData
 import com.example.quizapp.R
 import com.google.android.material.shape.CornerFamily
@@ -22,12 +20,13 @@ class RecyclerViewAdapter(private val data: List<QuizPreviewData>) : RecyclerVie
         // -> inflation only once for each view type (not for each item in the list like in ListView)
 
         // get the view elements of each quiz preview
-        val tvImage: com.google.android.material.imageview.ShapeableImageView = itemView.findViewById(R.id.imageView)
+        val imageView: com.google.android.material.imageview.ShapeableImageView = itemView.findViewById(R.id.imageView)
         val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        // todo is calculated for each quiz preview, make sure it is only once in the class but get a context
         // assign cornerRadiusPixels based on the parent context
         // convert 10dp from xml to pixels to make the image corner radius equal to the quiz preview corner radius
         val density: Float = parent.context.resources.displayMetrics.density
@@ -40,13 +39,12 @@ class RecyclerViewAdapter(private val data: List<QuizPreviewData>) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        // todo image is not tv type
-        holder.tvImage.setImageResource(item.imageResId)
+        holder.imageView.setImageResource(item.imageResId)
         holder.tvTitle.text = item.titleText
         holder.tvDescription.text = item.descriptionText
 
         // set the corner Radius to the first ShapeableImageView
-        holder.tvImage.shapeAppearanceModel = holder.tvImage.shapeAppearanceModel.toBuilder()
+        holder.imageView.shapeAppearanceModel = holder.imageView.shapeAppearanceModel.toBuilder()
             .apply { setAllCorners(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
     }
 

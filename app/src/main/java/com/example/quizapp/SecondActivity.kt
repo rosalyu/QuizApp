@@ -2,6 +2,7 @@ package com.example.quizapp
 
 import RecyclerViewAdapter
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ListView
 import android.widget.TextView
@@ -36,30 +37,32 @@ class SecondActivity: AppCompatActivity() {
             QuizPreviewData("Title 8", "Description 8", R.drawable.ic_launcher_background),
             QuizPreviewData("Title 9", "Description 9", R.drawable.ic_launcher_background),
             QuizPreviewData("Title 10", "Description 10", R.drawable.ic_launcher_background),
-            QuizPreviewData("Title 6", "Description 6", R.drawable.ic_launcher_background),
-            QuizPreviewData("Title 7", "Description 7", R.drawable.ic_launcher_background),
-            QuizPreviewData("Title 8", "Description 8", R.drawable.ic_launcher_background),
-            QuizPreviewData("Title 9", "Description 9", R.drawable.ic_launcher_background),
-            QuizPreviewData("Title 10", "Description 10", R.drawable.ic_launcher_background))
+            QuizPreviewData("Title 11", "Description 11", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 12", "Description 12", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 13", "Description 13", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 14", "Description 14", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 15", "Description 15", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 16", "Description 16", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 17", "Description 17", R.drawable.ic_launcher_background))
         //val listAdapter = ListAdapter(this, R.layout.list_element_layout, dataList)
         //listView.adapter = listAdapter
         val recyclerViewAdapter = RecyclerViewAdapter(dataList)
 
         // FrameLayout in the xml file is a container for the RecyclerView
-        val container = findViewById<FrameLayout>(R.id.listView)
+        val container = findViewById<FrameLayout>(R.id.frameLayout)
         val recyclerView = RecyclerView(this)
+        recyclerView.adapter = recyclerViewAdapter
+        // set height and width
         recyclerView.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+
         // set layout manager
-        // todo think of using GridLayout
         recyclerView.layoutManager = GridLayoutManager(this, 2)
-        recyclerView.adapter = recyclerViewAdapter
         recyclerView.isNestedScrollingEnabled = false
+
         // make spacings using decoration class
 
         // add recyclerView to the container (FrameLayout)
         container.addView(recyclerView)
-
-
     }
 }
