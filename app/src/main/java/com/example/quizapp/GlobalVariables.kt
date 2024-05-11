@@ -1,6 +1,6 @@
 package com.example.quizapp
 
-// Utility class to hold global variables todo use in quiz_preview_background.xml as well using data binding
+// Utility class to hold global variables
 class GlobalVariables {
     companion object {
         var cornerRadius: Int = 10

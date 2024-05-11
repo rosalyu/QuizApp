@@ -45,7 +45,7 @@ class RecyclerViewAdapter(private val data: List<QuizPreviewData>) : RecyclerVie
 
         // set the corner Radius to the first ShapeableImageView
         holder.imageView.shapeAppearanceModel = holder.imageView.shapeAppearanceModel.toBuilder()
-            .apply { setAllCorners(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
+            .apply { setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadiusPixels); setBottomRightCorner(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
     }
 
     override fun getItemCount(): Int {

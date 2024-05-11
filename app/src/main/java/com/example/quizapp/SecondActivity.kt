@@ -27,7 +27,7 @@ class SecondActivity: AppCompatActivity() {
 
         // initialize the data list for displaying content in the quiz previews of the ListView elements
         val dataList: List<QuizPreviewData> = listOf(
-            QuizPreviewData("Title 1", "Description 1", R.drawable.ic_launcher_background),
+            QuizPreviewData("Title 1", "Description 1", R.drawable.classical_1),
             QuizPreviewData("Title 2", "Description 2", R.drawable.ic_launcher_background),
             QuizPreviewData("Title 3", "Description 3", R.drawable.ic_launcher_background),
             QuizPreviewData("Title 4", "Description 4", R.drawable.ic_launcher_background),
@@ -44,8 +44,7 @@ class SecondActivity: AppCompatActivity() {
             QuizPreviewData("Title 15", "Description 15", R.drawable.ic_launcher_background),
             QuizPreviewData("Title 16", "Description 16", R.drawable.ic_launcher_background),
             QuizPreviewData("Title 17", "Description 17", R.drawable.ic_launcher_background))
-        //val listAdapter = ListAdapter(this, R.layout.list_element_layout, dataList)
-        //listView.adapter = listAdapter
+
         val recyclerViewAdapter = RecyclerViewAdapter(dataList)
 
         // FrameLayout in the xml file is a container for the RecyclerView
@@ -59,8 +58,6 @@ class SecondActivity: AppCompatActivity() {
         // set layout manager
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.isNestedScrollingEnabled = false
-
-        // make spacings using decoration class
 
         // add recyclerView to the container (FrameLayout)
         container.addView(recyclerView)
