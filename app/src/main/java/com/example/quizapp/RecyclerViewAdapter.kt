@@ -1,3 +1,5 @@
+import android.app.Dialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quizapp.GlobalVariables
 import com.example.quizapp.QuizPreviewData
 import com.example.quizapp.R
+import com.example.quizapp.SecondActivity
 import com.google.android.material.shape.CornerFamily
 
-class RecyclerViewAdapter(private val data: List<QuizPreviewData>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val context: Context, private val data: List<QuizPreviewData>) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private var cornerRadiusPixels: Float = 0f
 
@@ -46,9 +49,18 @@ class RecyclerViewAdapter(private val data: List<QuizPreviewData>) : RecyclerVie
         // set the corner Radius to the first ShapeableImageView
         holder.imageView.shapeAppearanceModel = holder.imageView.shapeAppearanceModel.toBuilder()
             .apply { setBottomLeftCorner(CornerFamily.ROUNDED, cornerRadiusPixels); setBottomRightCorner(CornerFamily.ROUNDED, cornerRadiusPixels) }.build()
+
+        // set action listeners to each SquareLayout quiz preview
+        holder.itemView.setOnClickListener {
+            if(context is SecondActivity) {
+                context.showQuizPreviewDialog(position, item.titleText, item.descriptionText)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
+
+
 }
