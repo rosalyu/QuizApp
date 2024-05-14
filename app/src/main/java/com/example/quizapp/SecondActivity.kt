@@ -71,7 +71,13 @@ class SecondActivity: AppCompatActivity() {
         dialog.show()
     }
 
-    fun startQuizActivity(position: Int) {
+    private fun startQuizActivity(position: Int) {
+        val quizActivity = Intent(this, QuizActivity::class.java)
+        // pass the value to SecondActivity
+        quizActivity.putExtra("selectedPosition", position.toString())
+        // go to next activity
+        startActivity(quizActivity)
+
 
     }
 

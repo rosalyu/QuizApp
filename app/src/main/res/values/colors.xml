@@ -9,5 +9,8 @@
     <color name="lightRed">#E35988</color>
     <color name="lightPurple">#8549B0</color>
 
+    <color name="greenCorrect">#4CAF50</color>
+    <color name="redWrong">#F44336</color>
+
 
 </resources>
