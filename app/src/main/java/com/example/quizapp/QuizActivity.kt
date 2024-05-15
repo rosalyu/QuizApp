@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 
 class QuizActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,21 +59,23 @@ class QuizActivity: AppCompatActivity() {
 
             // remove any option text view background colors from potential previous questions
             // and reset all textSizes to default and the text styles (bold)
-            tvOptions.forEach { it.background = null; it.textSize = 30f; it.setTypeface(it.typeface, Typeface.NORMAL) }
+            tvOptions.forEach { it.background = resources.getDrawable(R.drawable.option_background); it.textSize = 30f; it.setTypeface(it.typeface, Typeface.NORMAL) }
             // todo fix bold text reset
-
+            var finishedSelection = false
             var indexSelected: Int? = null
             tvOptions.forEachIndexed { tvIndex, tvOption ->
                 // set action listeners
                 tvOption.setOnClickListener {
-                    // set the text style to bold
-                    tvOption.setTypeface(tvOption.typeface, Typeface.BOLD)
-                    // save the selected index
-                    indexSelected = tvIndex // todo test if that makes sense
-                    // display the selected option as picked, by increasing text size and make it bold
-                    // readjust the other options to have their original size
-                    tvOptions.forEachIndexed { index, option ->  if(index == indexSelected)  option.textSize = 35f
-                    else option.textSize = 30f}
+                    if(!finishedSelection) {
+                        // set the text style to bold
+                        tvOption.setTypeface(tvOption.typeface, Typeface.BOLD)
+                        // save the selected index
+                        indexSelected = tvIndex // todo test if that makes sense
+                        // display the selected option as picked, by increasing text size and make it bold
+                        // readjust the other options to have their original size
+                        tvOptions.forEachIndexed { index, option ->  if(index == indexSelected)  option.textSize = 35f
+                        else option.textSize = 30f}
+                    }
                 }
             }
             btnSelect.setOnClickListener {
@@ -81,8 +84,14 @@ class QuizActivity: AppCompatActivity() {
                     Toast.makeText(this, "Please select one of the options.", Toast.LENGTH_SHORT).show()
                 }
                 else {
+                    finishedSelection = true
                     // regardless of what is pressed, display the correct answer with a green background
+
                     tvOptions[questionData.answer.value].setBackgroundColor(resources.getColor(R.color.greenCorrect))
+
+                    //  todo set background to a green or red drawable or think how to change the solid attribute of the drawable
+                   // tvOptions[questionData.answer.value].background = resources.getDrawable(R.drawable.newBackground_here)
+
                     // if the selected option is incorrect, add a red background to it
                     if(questionData.answer.value != indexSelected) {
                         tvOptions[indexSelected!!].setBackgroundColor(resources.getColor(R.color.redWrong))

@@ -15,7 +15,7 @@ class QuizPicker(position: Int) {
         8 -> QuizData(arrayListOf(QuestionData("Question 0", "option1", "option2", "option3", "option4", Option.ONE)))
         9 -> QuizData(arrayListOf(QuestionData("Question 0", "option1", "option2", "option3", "option4", Option.TWO)))
         10 -> QuizData(arrayListOf(QuestionData("Question 0", "option1", "option2", "option3", "option4", Option.THREE)))
-        11 -> QuizData(arrayListOf(QuestionData("Question 0", "option1", "option2", "option3", "option4", Option.FOUR)))
+        11 -> QuizData(arrayListOf(QuestionData("Question 0", "option1", "option2", "option3", "option44", Option.FOUR)))
 
         else -> null
     }
