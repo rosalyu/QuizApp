@@ -122,14 +122,14 @@ class QuizActivity: AppCompatActivity() {
                     tvProgress.text = StringBuilder(progressBar.progress.toString()).append("/").append(progressBar.max)
 
                     // set the button text depending on whether it is the last question or not
-                    btnSelect.text = if(questionDataArray.size == 1) "FINISH" else "CONTINUE" // todo use R class
+                    btnSelect.text = if(questionDataArray.size == 1) "RESULTS" else "CONTINUE" // todo use R class
                     btnSelect.setOnClickListener {
 
                         questionDataArray.removeAt(0)
                         // quiz ends, go to next activity
                         if(questionDataArray.isEmpty()) {
-                            // todo create the result activity to display after the quiz
-                            // todo think of how to remember the quiz results
+                            // todo start activity only when pressing finish in the result dialog
+                            //  here, instead, call a function to show the result dialog (implement the function)
                             startActivity(Intent(this, SecondActivity::class.java))
                         } else {
                             showQuestions(questionDataArray)

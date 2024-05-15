@@ -21,14 +21,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="start"
-            android:background="@color/black"/>
+            android:background="@color/darkPurple"/>
 
         <ImageButton
             android:id="@+id/btnSettings"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="end"
-            android:background="@color/black"/>
+            android:background="@color/darkPurple"/>
     </LinearLayout>
 
     <ProgressBar
