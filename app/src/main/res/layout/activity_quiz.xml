@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/activity_second_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,8 +22,8 @@
             android:id="@+id/tvQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/black"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
             android:text="fidkdjsklkdlsk"
             android:textSize="35sp"
             android:gravity="center" />
@@ -30,7 +31,7 @@
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:background="@mipmap/ic_launcher"
             />
         <TextView
@@ -68,12 +69,12 @@
             android:textColor="@color/black"
             android:background="@drawable/option_background"
             android:gravity="center"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="20dp"/>
         <Button
             android:id="@+id/btnSelect"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_shape_gradient"
+            android:background="@color/darkPurple"
             android:textColor="@color/white"
             android:textSize="25sp"
             />

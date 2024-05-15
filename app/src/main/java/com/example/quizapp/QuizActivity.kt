@@ -59,7 +59,7 @@ class QuizActivity: AppCompatActivity() {
 
             // remove any option text view background colors from potential previous questions
             // and reset all textSizes to default and the text styles (bold)
-            tvOptions.forEach { it.background = resources.getDrawable(R.drawable.option_background); it.textSize = 30f; it.setTypeface(it.typeface, Typeface.NORMAL) }
+            tvOptions.forEach { it.background = resources.getDrawable(R.drawable.option_background); it.textSize = 30f; it.setTypeface(null, Typeface.NORMAL) }
             // todo fix bold text reset
             var finishedSelection = false
             var indexSelected: Int? = null
@@ -67,14 +67,13 @@ class QuizActivity: AppCompatActivity() {
                 // set action listeners
                 tvOption.setOnClickListener {
                     if(!finishedSelection) {
-                        // set the text style to bold
-                        tvOption.setTypeface(tvOption.typeface, Typeface.BOLD)
                         // save the selected index
                         indexSelected = tvIndex // todo test if that makes sense
                         // display the selected option as picked, by increasing text size and make it bold
-                        // readjust the other options to have their original size
-                        tvOptions.forEachIndexed { index, option ->  if(index == indexSelected)  option.textSize = 35f
-                        else option.textSize = 30f}
+                        // readjust the other options to have their original size and set the text style to bold
+                        tvOptions.forEachIndexed { index, option ->  if(index == indexSelected) {option.textSize = 37f;
+                            option.setTypeface(tvOption.typeface, Typeface.BOLD) }
+                        else { option.textSize = 30f; option.setTypeface(null, Typeface.NORMAL) }}
                     }
                 }
             }
