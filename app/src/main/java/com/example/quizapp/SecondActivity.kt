@@ -20,6 +20,8 @@ class SecondActivity: AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         val userName = intent.getStringExtra("userName") // value passed from MainActivity
+
+
         // set the TextView with the username that the user typed in the field from the MainActivity
         findViewById<TextView>(R.id.tvHello).text = StringBuilder(getString(R.string.hello))
             .append(userName).append(getString(R.string.exclamation))
@@ -64,6 +66,7 @@ class SecondActivity: AppCompatActivity() {
         dialog.findViewById<TextView>(R.id.tvTitle).text = title
         dialog.findViewById<TextView>(R.id.tvDescription).text = description
         dialog.findViewById<Button>(R.id.startButton).setOnClickListener {
+            dialog.dismiss()
             startQuizActivity(position)
         }
         dialog.window?.setBackgroundDrawableResource(R.drawable.quiz_preview_background)
@@ -73,7 +76,7 @@ class SecondActivity: AppCompatActivity() {
 
     private fun startQuizActivity(position: Int) {
         val quizActivity = Intent(this, QuizActivity::class.java)
-        // pass the value to SecondActivity
+        // pass position to QuizActivity
         quizActivity.putExtra("selectedPosition", position.toString())
         // go to next activity
         startActivity(quizActivity)

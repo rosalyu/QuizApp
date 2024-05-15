@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 class QuizActivity: AppCompatActivity() {
+    // todo use name in result dialog and also pass it when starting SecondActivity
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
@@ -128,9 +130,9 @@ class QuizActivity: AppCompatActivity() {
                         questionDataArray.removeAt(0)
                         // quiz ends, go to next activity
                         if(questionDataArray.isEmpty()) {
-                            // todo start activity only when pressing finish in the result dialog
+                            // todo finish only when pressing finish in the result dialog
                             //  here, instead, call a function to show the result dialog (implement the function)
-                            startActivity(Intent(this, SecondActivity::class.java))
+                            finish()
                         } else {
                             showQuestions(questionDataArray)
                         }
