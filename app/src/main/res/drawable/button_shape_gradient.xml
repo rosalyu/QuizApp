@@ -3,5 +3,5 @@
     android:shape="rectangle">
     <gradient android:startColor="@color/lightPurple"
         android:endColor="@color/lightRed"/>
-    <corners android:radius="4dp"/>
+    <corners android:radius="5dp"/>
 </shape>
