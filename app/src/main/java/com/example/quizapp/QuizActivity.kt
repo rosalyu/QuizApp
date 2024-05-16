@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -46,6 +47,9 @@ class QuizActivity: AppCompatActivity() {
         val tvOption3 = findViewById<TextView>(R.id.tvOption3)
         val tvOption4 = findViewById<TextView>(R.id.tvOption4)
         val btnSelect = findViewById<Button>(R.id.btnSelect)
+
+        // counts the amount of correct answers
+        var countCorrect = 0
 
         // if questionData is null, then no such data exists, throw exception as
         // this is an error in the program and is not expected
@@ -111,13 +115,17 @@ class QuizActivity: AppCompatActivity() {
                     // regardless of what is pressed, display the correct answer with a green background
                     tvOptions[questionData.answer.value].backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.greenCorrect))
 
-                    //  todo set background to a green or red drawable or think how to change the solid attribute of the drawable
-                   // tvOptions[questionData.answer.value].background = resources.getDrawable(R.drawable.newBackground_here)
-
-                    // if the selected option is incorrect, add a red background to it
-                    if(questionData.answer.value != indexSelected) {
+                    // handle user selection if correct or wrong
+                    if(questionData.answer.value == indexSelected) {
+                        // increment countCorrect if the selected answer is correct
+                        countCorrect++
+                    } else {
+                        // if the selected option is incorrect, add a red background to it
                         tvOptions[indexSelected!!].backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.redWrong))
                     }
+
+                    //  todo set background to a green or red drawable or think how to change the solid attribute of the drawable
+                    // tvOptions[questionData.answer.value].background = resources.getDrawable(R.drawable.newBackground_here)
 
                     // adjust progress bar
                     progressBar.progress++
@@ -132,7 +140,7 @@ class QuizActivity: AppCompatActivity() {
                         if(questionDataArray.isEmpty()) {
                             // todo finish only when pressing finish in the result dialog
                             //  here, instead, call a function to show the result dialog (implement the function)
-                            finish()
+                            showResultDialog("name", countCorrect, progressBar.max)
                         } else {
                             showQuestions(questionDataArray)
                         }
@@ -141,5 +149,34 @@ class QuizActivity: AppCompatActivity() {
             }
         }
         showQuestions(questions)
+    }
+    private fun showResultDialog(userName: CharSequence, amountCorrect: Int, amountTotal: Int) {
+
+        // determine the message to the user in the dialog title based on amountCorrect
+        val percentageCorrect = amountCorrect.toFloat() / amountTotal.toFloat()
+
+        val feedbackText = when {
+            percentageCorrect < 0.2f -> "Better next time, "
+            percentageCorrect < 0.4f -> "Not bad, "
+            percentageCorrect < 0.6f -> "Pretty good, "
+            percentageCorrect < 0.8f -> "Well done, "
+            else -> "Excellent, "
+        }
+
+        val dialog = Dialog(this)
+
+        dialog.setContentView(R.layout.dialog_preview_layout)
+
+        dialog.findViewById<TextView>(R.id.tvTitle).text = StringBuilder(feedbackText).append(userName).append("!")
+        dialog.findViewById<TextView>(R.id.tvDescription).text = StringBuilder(amountCorrect.toString()).append("/").append(amountTotal)
+        val btnFinish = dialog.findViewById<Button>(R.id.startButton)
+        btnFinish.text = "FINISH"
+        btnFinish.setOnClickListener {
+            dialog.dismiss()
+            finish()
+        }
+        dialog.window?.setBackgroundDrawableResource(R.drawable.quiz_preview_background)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
     }
 }
